@@ -14,7 +14,7 @@ Leveraging SQL skills to extract and analyze data from various tables in the Mav
 1. We will need a list of all staff members, including their first and last names, email addresses, and the store identification number where they work.
 ```sql
    Select   store_id,
-		        count(inventory_id) as items 
+	count(inventory_id) as items 
 	from inventory 
 	group by store_id;
   ```
@@ -29,7 +29,7 @@ Select  store_id,
 3. We will need a count of active customers for each of your stores. Separately, please.
 ```sql
 select first_name,
-		    last_name,
+	last_name,
         email,
         store_id
 	from staff;
@@ -43,7 +43,7 @@ select count(email)
 5. We are interested in how diverse your film offering is as a means of understanding how likely you are to keep customers engaged in the future. Please provide a count of unique film titles you have in inventory at each store and then provide a count of the unique categories of films you provide.
 ```sql
 select  s.store_id,
-		    CONCAT(s.first_name," ", s.last_name) as Name,
+	CONCAT(s.first_name," ", s.last_name) as Name,
         a.address,
         a.district,
         c.city,
@@ -61,11 +61,11 @@ select  s.store_id,
 6. We would like to understand the replacement cost of your films. Please provide the replacement cost for the film that is least expensive to replace, the most expensive to replace, and the average of all films you carry.
 ```sql
 select      inv.inventory_id,
-			      inv.store_id,
+	    inv.store_id,
             f.title,
             f.rating,
             f.rental_rate,
-			f.replacement_cost
+	    f.replacement_cost
 		from inventory as inv
 	inner join film  as f
 		on f.film_id = inv.film_id;
@@ -85,12 +85,12 @@ select  inv.store_id,
 8. We would like to better understand what your customer base looks like. Please provide a list of all customer identification values, with a count of rentals they have made all-time, with your highest volume customers at the top of the list.
 ```sql
     select 
-			inventory.store_id,
-			category.name as category, 
-			count(film.film_id),
-			 avg(film.replacement_cost) as 'Average replacement cost',
-			sum(film.replacement_cost) as 'total replacement_cost'
-		from  film
+	inventory.store_id,
+	category.name as category, 
+	count(film.film_id),
+	 avg(film.replacement_cost) as 'Average replacement cost',
+	sum(film.replacement_cost) as 'total replacement_cost'
+from  film
     left join film_category
 		on film.film_id = film_category.film_id
 	left join category
